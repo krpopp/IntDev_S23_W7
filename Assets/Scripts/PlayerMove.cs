@@ -25,10 +25,15 @@ public class PlayerMove : MonoBehaviour
     bool jump = false;
     bool onGround = false;
 
+    public ParticleSystem burstParticles;
+
+    public Animator myAnim;
+
     // Start is called before the first frame update
     void Start()
     {
         myBody = GetComponent<Rigidbody2D>();
+        //myAnim = GetComponent<Animator>();
         ResetUI();
     }
     // Update is called once per frame
@@ -54,6 +59,13 @@ public class PlayerMove : MonoBehaviour
         //also: trigger the hasHit bool if this is the first time we've hit the ground
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDist);
         if(hit.collider != null && hit.transform.tag == "Ground"){
+            //if we weren't on the ground previously
+            //then
+            //play the particle effect
+            if (!onGround)
+            {
+                burstParticles.Play();
+            }
             onGround = true;
         } else{
             onGround = false;
@@ -64,6 +76,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            myAnim.SetTrigger("hitEnemy");
             //if we hit an enemy
             //decrease out life count, reflect that in the UI
             //restart the game if we're dead :(
