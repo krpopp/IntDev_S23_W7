@@ -25,8 +25,6 @@ public class PlayerMove : MonoBehaviour
     bool jump = false;
     bool onGround = false;
 
-    public ParticleSystem burstParticles;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -64,7 +62,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.transform.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             //if we hit an enemy
             //decrease out life count, reflect that in the UI
@@ -80,7 +78,7 @@ public class PlayerMove : MonoBehaviour
                 SceneManager.LoadScene(0);
             }
             
-        } else if(collision.gameObject.transform.tag == "Collect")
+        } else if(collision.gameObject.tag == "Collect")
         {
             //if we hit a collectable
             //remove that collectable, increase the score and make the UI reflect that
