@@ -12,16 +12,16 @@ public class PlayerMove : MonoBehaviour
     public float jumpForce;
 
     //for particles
-    ParticleBurst burstParticles;
-    ParticleTrail trailParticles;
+    //ParticleBurst burstParticles;
+    //ParticleTrail trailParticles;
     bool hasHit = false;
 
     //for shape animation
-    Squash squashAnim;
-    Stretch strechAnim;
+    //Squash squashAnim;
+    //Stretch strechAnim;
 
     //for enemy collision animation
-    EnemyHit enemyHit;
+    //EnemyHit enemyHit;
 
     //for UI
     public TMP_Text livesText;
@@ -41,19 +41,19 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         myBody = GetComponent<Rigidbody2D>();
-        FindJuicyComponents();
+        //FindJuicyComponents();
         ResetUI();
     }
 
     //IGNORE this is something i'm doing for the in class activity
-    void FindJuicyComponents()
-    {
-        burstParticles = GetComponentInChildren<ParticleBurst>();
-        trailParticles = GetComponentInChildren<ParticleTrail>();
-        squashAnim = GetComponentInChildren<Squash>();
-        strechAnim = GetComponentInChildren<Stretch>();
-        enemyHit = GetComponentInChildren<EnemyHit>();
-    }
+    //void FindJuicyComponents()
+    //{
+    //    burstParticles = GetComponentInChildren<ParticleBurst>();
+    //    trailParticles = GetComponentInChildren<ParticleTrail>();
+    //    squashAnim = GetComponentInChildren<Squash>();
+    //    strechAnim = GetComponentInChildren<Stretch>();
+    //    enemyHit = GetComponentInChildren<EnemyHit>();
+    //}
 
     // Update is called once per frame
     void Update()
@@ -64,8 +64,8 @@ public class PlayerMove : MonoBehaviour
     }
 
     void FixedUpdate(){
-        HandleParticles();
-        HandleAnimations();
+        //HandleParticles();
+        //HandleAnimations();
 
         //horizontal velocity
         myBody.velocity = new Vector3(moveX, myBody.velocity.y);    
@@ -102,7 +102,7 @@ public class PlayerMove : MonoBehaviour
             ResetUI();
             if (lives > 0)
             {
-                HandleEnemyCollision();
+                //HandleEnemyCollision();
             }
             else
             {
@@ -137,49 +137,49 @@ public class PlayerMove : MonoBehaviour
     }
 
     //for all particle effects
-    void HandleParticles(){
-        //if you include dust jumping particles and we just hit the ground
-        //run those particles
-        if(burstParticles != null && hasHit){
-            burstParticles.Burst();
-        }
-        //if you include the dust running particles and the player is moving on the ground
-        //run the trail particles; otherwise, turn them off
-        if(trailParticles != null){
-            if(myBody.velocity.x != 0 && onGround){
-                trailParticles.StartTrail();
-            } else{
-                trailParticles.StopTrail();
-            }
-        }
-    }
+    //void HandleParticles(){
+    //    //if you include dust jumping particles and we just hit the ground
+    //    //run those particles
+    //    if(burstParticles != null && hasHit){
+    //        burstParticles.Burst();
+    //    }
+    //    //if you include the dust running particles and the player is moving on the ground
+    //    //run the trail particles; otherwise, turn them off
+    //    if(trailParticles != null){
+    //        if(myBody.velocity.x != 0 && onGround){
+    //            trailParticles.StartTrail();
+    //        } else{
+    //            trailParticles.StopTrail();
+    //        }
+    //    }
+    //}
 
     //for juicy shape animations
-    void HandleAnimations()
-    {
-        //if you include the squash animation and we just hit the ground
-        //play the squash animation 
-        if(squashAnim != null && hasHit)
-        {
-            squashAnim.TriggerSquash();
-        }
-        //if you include the strech animation and we just jumped
-        //play the stretch animation
-        if(strechAnim != null && jump)
-        {
-            strechAnim.TriggerStrech();
-        }
-    }
+    //void HandleAnimations()
+    //{
+    //    //if you include the squash animation and we just hit the ground
+    //    //play the squash animation 
+    //    if(squashAnim != null && hasHit)
+    //    {
+    //        squashAnim.TriggerSquash();
+    //    }
+    //    //if you include the strech animation and we just jumped
+    //    //play the stretch animation
+    //    if(strechAnim != null && jump)
+    //    {
+    //        strechAnim.TriggerStrech();
+    //    }
+    //}
 
     //for juicy enemy collisions
-    void HandleEnemyCollision()
-    {
-        //if you include the enemy hit juice
-        //run the code for when we hit an enemy
-        if (enemyHit != null)
-        {
-            enemyHit.HitEnemy();
-        }
-    }
+    //void HandleEnemyCollision()
+    //{
+    //    //if you include the enemy hit juice
+    //    //run the code for when we hit an enemy
+    //    if (enemyHit != null)
+    //    {
+    //        enemyHit.HitEnemy();
+    //    }
+    //}
     
 }
