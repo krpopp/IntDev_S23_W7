@@ -11,18 +11,6 @@ public class PlayerMove : MonoBehaviour
     public float raycastDist;
     public float jumpForce;
 
-    //for particles
-    //ParticleBurst burstParticles;
-    //ParticleTrail trailParticles;
-    bool hasHit = false;
-
-    //for shape animation
-    //Squash squashAnim;
-    //Stretch strechAnim;
-
-    //for enemy collision animation
-    //EnemyHit enemyHit;
-
     //for UI
     public TMP_Text livesText;
     public TMP_Text scoreText;
@@ -37,24 +25,14 @@ public class PlayerMove : MonoBehaviour
     bool jump = false;
     bool onGround = false;
 
+    public ParticleSystem burstParticles;
+
     // Start is called before the first frame update
     void Start()
     {
         myBody = GetComponent<Rigidbody2D>();
-        //FindJuicyComponents();
         ResetUI();
     }
-
-    //IGNORE this is something i'm doing for the in class activity
-    //void FindJuicyComponents()
-    //{
-    //    burstParticles = GetComponentInChildren<ParticleBurst>();
-    //    trailParticles = GetComponentInChildren<ParticleTrail>();
-    //    squashAnim = GetComponentInChildren<Squash>();
-    //    strechAnim = GetComponentInChildren<Stretch>();
-    //    enemyHit = GetComponentInChildren<EnemyHit>();
-    //}
-
     // Update is called once per frame
     void Update()
     {
@@ -64,8 +42,6 @@ public class PlayerMove : MonoBehaviour
     }
 
     void FixedUpdate(){
-        //HandleParticles();
-        //HandleAnimations();
 
         //horizontal velocity
         myBody.velocity = new Vector3(moveX, myBody.velocity.y);    
@@ -80,11 +56,6 @@ public class PlayerMove : MonoBehaviour
         //also: trigger the hasHit bool if this is the first time we've hit the ground
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDist);
         if(hit.collider != null && hit.transform.tag == "Ground"){
-            if(!onGround){
-                hasHit = true;
-            } else{
-                hasHit = false;
-            }
             onGround = true;
         } else{
             onGround = false;
@@ -135,51 +106,5 @@ public class PlayerMove : MonoBehaviour
             jump = true;
         }
     }
-
-    //for all particle effects
-    //void HandleParticles(){
-    //    //if you include dust jumping particles and we just hit the ground
-    //    //run those particles
-    //    if(burstParticles != null && hasHit){
-    //        burstParticles.Burst();
-    //    }
-    //    //if you include the dust running particles and the player is moving on the ground
-    //    //run the trail particles; otherwise, turn them off
-    //    if(trailParticles != null){
-    //        if(myBody.velocity.x != 0 && onGround){
-    //            trailParticles.StartTrail();
-    //        } else{
-    //            trailParticles.StopTrail();
-    //        }
-    //    }
-    //}
-
-    //for juicy shape animations
-    //void HandleAnimations()
-    //{
-    //    //if you include the squash animation and we just hit the ground
-    //    //play the squash animation 
-    //    if(squashAnim != null && hasHit)
-    //    {
-    //        squashAnim.TriggerSquash();
-    //    }
-    //    //if you include the strech animation and we just jumped
-    //    //play the stretch animation
-    //    if(strechAnim != null && jump)
-    //    {
-    //        strechAnim.TriggerStrech();
-    //    }
-    //}
-
-    //for juicy enemy collisions
-    //void HandleEnemyCollision()
-    //{
-    //    //if you include the enemy hit juice
-    //    //run the code for when we hit an enemy
-    //    if (enemyHit != null)
-    //    {
-    //        enemyHit.HitEnemy();
-    //    }
-    //}
     
 }
